@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <app-select></app-select>
+    <app-select
+    :select-data="source"
+    @selectedData='selectedE'>
+  </app-select>
   </div>
 </template>
 
@@ -11,6 +14,16 @@ export default {
   name: 'app',
   components: {
     appSelect
+  },
+  data () {
+    return {
+      source: ['ww','ee','rr','tt']
+    }
+  },
+  methods: {
+    selectedE (v) {
+      console.log(v);
+    }
   }
 }
 </script>

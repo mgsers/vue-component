@@ -1,13 +1,31 @@
 <template>
-  <div class="select-box" :class="{active: isShow}" @click="selectShow()">aa</div>
+  <div>
+    <div class="select-box"
+      :class="{active: isShow}"
+      @click="selectShow()">
+      <span>
+        {{ selectName }}
+      </span>
+    </div>
+    <ul class="select-ul" v-if="isShow">
+      <li  v-for="item in selectData" @click="liSelect(item)">{{ item }}</li>
+    </ul>
+  </div>
 </template>
 
 <script>
 export default {
   name: 'select',
+  props: {
+    selectData: {
+      type: Array,
+      required: true
+    }
+  },
   data () {
     return {
-      isShow: false
+      isShow: false,
+      selectName: '请选择'
     }
   },
   methods: {
@@ -17,6 +35,11 @@ export default {
       }else {
         this.isShow = false
       }
+    },
+    liSelect (num) {
+      this.selectName = num
+      this.isShow = false;
+      this.$emit('selectedData',num)
     }
   }
 }
@@ -30,6 +53,21 @@ export default {
   border: 1px solid #ccc;
   cursor: pointer;
   border-radius: 4px;
+}
+.select-ul {
+  margin: 0;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 150px;
+  box-shadow: 0 5px 30px #e4ebf1;
+}
+.select-ul li {
+  height: 30px;
+  cursor: pointer;
+}
+.select-ul li:hover {
+  background-color: #f7f7f7;
 }
 .aa {
   color: red;
