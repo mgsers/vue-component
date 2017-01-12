@@ -1,4 +1,6 @@
 <template>
+
+
   <div class="">
     <div
     class="tag-box clearfix"
@@ -50,7 +52,9 @@ export default {
       isShow: false,
       selectName: [],
       iptKey: '',
-      onBlur: false
+      onBlur: false,
+      key: 0,
+      item: [1,2,3,4,5]
     }
   },
   computed: {
@@ -62,6 +66,9 @@ export default {
     }
   },
   mounted () {
+    if(!localStorage.aa){
+      localStorage.aa = 1
+    }
     this.iptData.forEach((i,idx) => {
       if(i.checked == true){
         this.selectName.push(i.name)
@@ -79,9 +86,13 @@ export default {
       }
     },
     choose (val) {
-      console.log('sss')
       this.selectName.push(val.name)
-      this.onBlur = true
+      this.iptData.forEach((v,i)=>{
+        if(v.name == val.name){
+          this.iptData.splice(i,1)
+        }
+      })
+      this.isShow = false
     }
   }
 }

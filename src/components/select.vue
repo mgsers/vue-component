@@ -96,7 +96,7 @@ export default {
 
 .select-ul li.checked {
   background-color: #f7f7f7;
-  cursor: default
+  cursor: default;
   font-weight: 600;
 }
 
